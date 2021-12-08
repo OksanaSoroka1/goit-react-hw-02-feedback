@@ -3,6 +3,7 @@ import { Component } from 'react';
 import { FeedbackOptions } from './components/FeedbackOptions';
 import { Statistics } from './components/Statistics';
 import { Section } from './components/Section';
+import { Notification } from './components/Notification';
 
 class App extends Component {
   state = {
@@ -28,8 +29,8 @@ class App extends Component {
   render() {
     const { good, neutral, bad } = this.state;
     const stateArr = Object.keys(this.state);
-    console.log(stateArr);
     const totalFeedback = this.countTotalFeedback();
+    console.log(totalFeedback);
     const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
 
     return (
@@ -41,19 +42,18 @@ class App extends Component {
           />
         </Section>
         <Section title="Statistics">
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={totalFeedback}
-            positivePercentage={positiveFeedbackPercentage}
-          />
+          {!totalFeedback ? (
+            <Notification message="There is no feedback" />
+          ) : (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={totalFeedback}
+              positivePercentage={positiveFeedbackPercentage}
+            />
+          )}
         </Section>
-
-        {/* <ul >
-          <FeedbackOptions options={ stateArr} onLeaveFeedback={this.onButtonClick}/>
-          {stateArr.map((key) => (<FeedbackOptions key={ key} options={key} onLeaveFeedback={()=>this.onButtonClick(key)}/>))}          
-        </ul> */}
       </div>
     );
   }

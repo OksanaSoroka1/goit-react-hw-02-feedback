@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import { FeadbackOptionsItem } from './feadbackOptionsItem';
+import css from './feedback.module.css';
 
 const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
-    <ul>
+    <ul className={css.list}>
       {options.map(option => (
         <FeadbackOptionsItem
           key={option}
@@ -11,7 +12,6 @@ const FeedbackOptions = ({ options, onLeaveFeedback }) => {
           onLeaveFeedback={onLeaveFeedback}
         />
       ))}
-      {/*  {options.map(option => (<li ><button type="button" onClick={()=>onLeaveFeedback(option)}>{option}</button></li>)) } */}
     </ul>
   );
 };
